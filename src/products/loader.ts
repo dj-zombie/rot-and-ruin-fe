@@ -8,8 +8,6 @@ export const useProductsLoader = routeLoader$(async () => {
     import.meta.env.SSR ? "server" : "client",
   );
   const products = await productService.getProducts();
-  console.log("fetched products", products);
-  console.table(products);
   return products;
 });
 

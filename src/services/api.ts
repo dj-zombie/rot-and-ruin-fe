@@ -57,8 +57,5 @@ export async function fetcher<T>(
     return null as T; // Or undefined, or an empty object, depending on your API contract
   }
 
-  console.log(`URL: ${url}`, response.body);
-  console.table(response.body);
-  // For successful responses, always parse as JSON
   return response.json() as Promise<T>;
 }
