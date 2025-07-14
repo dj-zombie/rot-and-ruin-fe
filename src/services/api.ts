@@ -1,6 +1,6 @@
 // src/services/api.ts
 const API_BASE_URL =
-  import.meta.env.VITE_PUBLIC_API_BASE_URL || "http://localhost:8080/api"; // Use environment variable
+  import.meta.env.VITE_PUBLIC_API_BASE_URL
 
 export async function fetcher<T>(
   url: string,
@@ -8,7 +8,7 @@ export async function fetcher<T>(
 ): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${url}`, {
     headers: {
-      "Content-Type": "text/plain", // This header is for your OUTGOING request
+      "Content-Type": "text/plain",
       ...options?.headers,
     },
     ...options,
