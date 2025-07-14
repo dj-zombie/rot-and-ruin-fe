@@ -29,7 +29,7 @@ export const ProductCard = component$((props: ProductCardProps) => {
       href={product.productUrl}
       class="group block flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-lg"
     >
-      <div class="flex h-[40] w-full items-center justify-center overflow-hidden bg-gray-100">
+      <div class="flex h-40 w-full items-center justify-center overflow-hidden bg-gray-100">
         <OptimizedImage
           src={imageUrl}
           alt={imageAltText}
