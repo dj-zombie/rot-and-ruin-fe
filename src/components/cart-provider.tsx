@@ -11,7 +11,7 @@ export interface CartProviderProps {
   children?: any;
 }
 
-export const CartProvider = component$<CartProviderProps>(({ children }) => {
+export const CartProvider = component$<CartProviderProps>(() => {
   const cartStore = useCartStore();
 
   useContextProvider(CartContext, cartStore);
