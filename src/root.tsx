@@ -1,6 +1,9 @@
 import { component$, isDev } from "@builder.io/qwik";
+// import { component$ } from "@builder.io/qwik";
 import { QwikCityProvider, RouterOutlet } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
+import { Header } from "./components/ui/Header";
+import { CartProvider } from "./components/cart-provider";
 
 import "./global.css";
 
@@ -11,6 +14,23 @@ export default component$(() => {
    *
    * Don't remove the `<head>` and `<body>` elements.
    */
+
+  // return (
+  //   <QwikCityProvider>
+  //     <head>
+  //       <meta charSet="utf-8" />
+  //       <RouterHead />
+  //     </head>
+  //     <body lang="en">
+  //       {/* Remove CartProvider temporarily */}
+  //       <Header />
+  //       <main>
+  //         {/* No padding class */}
+  //         <RouterOutlet />
+  //       </main>
+  //     </body>
+  //   </QwikCityProvider>
+  // );
 
   return (
     <QwikCityProvider>
@@ -25,7 +45,12 @@ export default component$(() => {
         <RouterHead />
       </head>
       <body lang="en">
-        <RouterOutlet />
+        <CartProvider>
+          <Header />
+          <main class="min-h-screen bg-blue-100 pt-15">
+            <RouterOutlet />
+          </main>
+        </CartProvider>
       </body>
     </QwikCityProvider>
   );

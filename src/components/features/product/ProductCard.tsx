@@ -27,9 +27,10 @@ export const ProductCard = component$((props: ProductCardProps) => {
   return (
     <Link
       href={product.productUrl}
-      class="group block flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-lg"
+      // class="group product-card flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 shadow-sm transition-shadow duration-200 ease-in-out hover:shadow-lg"
+      class="product-card group relative flex w-full flex-col overflow-visible p-2 md:p-4"
     >
-      <div class="flex h-[30rem] w-full items-center justify-center overflow-hidden bg-gray-100">
+      <div class="flex h-[10rem] w-full items-center justify-center overflow-hidden bg-[var(--dark-red)] md:h-[15rem] lg:h-[25rem] xl:h-[35rem]">
         <OptimizedImage
           src={imageUrl}
           alt={imageAltText}
@@ -49,24 +50,27 @@ export const ProductCard = component$((props: ProductCardProps) => {
       </div>
 
       <div class="flex flex-grow flex-col p-4">
-        {product.brand && (
+        {/* {product.brand && (
           <p class="mb-1 text-sm text-gray-500">{product.brand}</p>
-        )}
-        <h2 class="mb-2 text-lg leading-tight font-semibold text-gray-800 transition-colors duration-200 ease-in-out group-hover:text-blue-600">
+        )} */}
+        {/* <h2 class="mb-2 text-lg leading-tight font-semibold text-gray-800 transition-colors duration-200 ease-in-out group-hover:text-blue-600"> */}
+        <h2 class="font-secondary text-center text-base! text-white lg:text-xl!">
           {product.name}
         </h2>
-        <p class="mt-auto text-xl font-bold text-gray-900">
+        {/* <p class="mt-auto text-xl font-bold text-gray-900"> */}
+        <p class="ghost-text mt-auto pt-1 text-center text-xl">
           ${product.price.toFixed(2)}
         </p>
         <button
-          class="mt-4 self-stretch rounded-md bg-blue-600 px-4 py-2 font-semibold text-white transition-colors duration-200 ease-in-out hover:bg-blue-700"
+          // class="mt-4 self-stretch rounded-md bg-blue-600 px-4 py-2 font-semibold text-white transition-colors duration-200 ease-in-out hover:bg-blue-700"
+          class="glowing-btn animate-pulse-glow mt-4 cursor-pointer rounded-sm border border-[#8a0303] bg-black/50 px-8 py-3 text-lg tracking-wider text-white uppercase"
           onClick$={(e) => {
             e.preventDefault();
             e.stopPropagation();
             console.log(`Add to cart: ${product.name}`);
           }}
         >
-          Add to Cart
+          View Details
         </button>
       </div>
     </Link>

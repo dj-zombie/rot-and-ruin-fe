@@ -1,9 +1,11 @@
 // src/routes/products/[productUrl]/index.tsx
-import { component$ } from "@builder.io/qwik";
+import { component$, useSignal, useContext } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 import { useProductLoader } from "./loader"; // Import the loader
 import type { Product } from "~/types/product";
 import { OptimizedImage } from "~/components/ui/OptimizedImage";
+// import { useCartStore } from "~/stores/cart-store";
+import { CartContext } from "~/stores/cart-store";
 
 // Re-export the loader to ensure it is recognized by Qwik City
 export { useProductLoader } from "./loader";
@@ -11,6 +13,13 @@ export { useProductLoader } from "./loader";
 export default component$(() => {
   const productSignal = useProductLoader(); // Access the product data from the loader
   const product: Product = productSignal.value; // Extract the product
+  const cartStore = useContext(CartContext);
+  const quantity = useSignal(1);
+
+  const notification = useSignal<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   // Handle case where product is not found (though loader throws error, this is just in case)
   if (!product) {
@@ -92,7 +101,9 @@ export default component$(() => {
           </div>
 
           {/* Product Title and Brand */}
-          <h1 class="mb-2 text-3xl font-bold text-gray-900">{product.name}</h1>
+          <h1 class="gothic-title mb-2 text-4xl text-red-800">
+            {product.name}
+          </h1>
           {product.brand && (
             <p class="mb-4 text-lg text-gray-600">by {product.brand}</p>
           )}
@@ -114,6 +125,14 @@ export default component$(() => {
             {product.stockLevel > 0 ? (
               <p class="font-semibold text-green-600">
                 In Stock ({product.stockLevel} available)
+                <input
+                  type="number"
+                  min="1"
+                  max={product.stockLevel}
+                  // CHANGED: Use bind:value to two-way bind to the signal
+                  bind:value={quantity}
+                  class="w-20 rounded border border-gray-300 p-1 text-center"
+                />
               </p>
             ) : (
               <p class="font-semibold text-red-600">Out of Stock</p>
@@ -122,15 +141,49 @@ export default component$(() => {
 
           {/* Add to Cart Button */}
           <button
-            class="mb-6 w-full rounded-md bg-blue-600 px-6 py-3 font-bold text-white transition-colors duration-200 ease-in-out hover:bg-blue-700"
-            disabled={!product.stockLevel} // Disable if out of stock
-            onClick$={() => {
-              console.log(`Added ${product.name} to cart`);
-              // TODO: Implement cart logic using a store or service
+            // class="mb-6 w-full rounded-md bg-blue-600 px-6 py-3 font-bold text-white transition-colors duration-200 ease-in-out hover:bg-blue-700"
+            class="glowing-btn animate-pulse-glow cursor mb-4 cursor-pointer rounded-sm border border-[#8a0303] bg-black/50 px-8 py-3 text-lg tracking-wider text-white uppercase"
+            disabled={!product.stockLevel || cartStore.state.isLoading}
+            onClick$={async () => {
+              console.log(
+                `[UI] Button Clicked. Adding product ${product.id} with quantity ${quantity.value}.`,
+              );
+              notification.value = null; // Clear previous message
+              try {
+                await cartStore.addToCart(product.id, quantity.value);
+                notification.value = {
+                  message: "Item added to cart!",
+                  type: "success",
+                };
+                // Optional: hide notification after 3 seconds
+                setTimeout(() => (notification.value = null), 3000);
+              } catch (error) {
+                console.error("Failed to add to cart:", error);
+                notification.value = {
+                  message: "Could not add item.",
+                  type: "error",
+                };
+              }
             }}
           >
-            {product.stockLevel > 0 ? "Add to Cart" : "Unavailable"}
+            {cartStore.state.isLoading
+              ? "Adding..."
+              : product.stockLevel > 0
+                ? "Add to Cart"
+                : "Unavailable"}
           </button>
+
+          {notification.value && (
+            <div
+              class={`mt-2 rounded-md p-3 text-sm ${
+                notification.value.type === "success"
+                  ? "bg-green-100 text-green-800"
+                  : "bg-red-100 text-red-800"
+              }`}
+            >
+              {notification.value.message}
+            </div>
+          )}
 
           {/* Product Description */}
           <div class="mb-6">

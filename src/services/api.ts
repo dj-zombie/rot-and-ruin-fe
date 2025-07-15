@@ -1,17 +1,19 @@
 // src/services/api.ts
-const API_BASE_URL =
-  import.meta.env.VITE_PUBLIC_API_BASE_URL
+const API_BASE_URL = import.meta.env.VITE_PUBLIC_API_BASE_URL;
 
-export async function fetcher<T>(
+// Core fetch function with error handling
+async function fetchWithErrorHandling<T>(
   url: string,
   options?: RequestInit,
 ): Promise<T> {
   const response = await fetch(`${API_BASE_URL}${url}`, {
     headers: {
-      "Content-Type": "text/plain",
+      Accept: "application/json",
+      "Content-Type": "application/json",
       ...options?.headers,
     },
     ...options,
+    credentials: "include",
   });
 
   if (!response.ok) {
@@ -21,10 +23,8 @@ export async function fetcher<T>(
     if (contentType && contentType.includes("application/json")) {
       try {
         const errorData = await response.json();
-        // Assuming your .NET errors might have a 'message' or similar field
         errorMessage = errorData.message || JSON.stringify(errorData);
       } catch (jsonParseError) {
-        // If it claims to be JSON but fails to parse, it's malformed JSON
         console.error(
           `Failed to parse JSON error response for ${url}:`,
           jsonParseError,
@@ -32,10 +32,8 @@ export async function fetcher<T>(
         errorMessage = `API Error ${response.status}: Server returned malformed JSON error response.`;
       }
     } else if (response.status === 204) {
-      // Handle 204 No Content specifically, it has no body
       errorMessage = `API Error ${response.status}: No Content`;
     } else {
-      // Fallback: Try to read as plain text
       try {
         const textError = await response.text();
         errorMessage =
@@ -52,10 +50,61 @@ export async function fetcher<T>(
     throw new Error(errorMessage);
   }
 
-  // Handle successful 204 responses (e.g., successful DELETE)
+  // Handle successful 204 responses
   if (response.status === 204) {
-    return null as T; // Or undefined, or an empty object, depending on your API contract
+    return null as T;
   }
 
   return response.json() as Promise<T>;
 }
+
+// RESTful API client with method helpers
+export const apiClient = {
+  // GET request
+  async get<T>(url: string, options?: RequestInit): Promise<T> {
+    return fetchWithErrorHandling<T>(url, {
+      method: "GET",
+      ...options,
+    });
+  },
+
+  // POST request with JSON body
+  async post<T>(url: string, data?: any, options?: RequestInit): Promise<T> {
+    return fetchWithErrorHandling<T>(url, {
+      method: "POST",
+      body: data ? JSON.stringify(data) : undefined,
+      ...options,
+    });
+  },
+
+  // PUT request with JSON body
+  async put<T>(url: string, data?: any, options?: RequestInit): Promise<T> {
+    return fetchWithErrorHandling<T>(url, {
+      method: "PUT",
+      body: data ? JSON.stringify(data) : undefined,
+      ...options,
+    });
+  },
+
+  // PATCH request with JSON body
+  async patch<T>(url: string, data?: any, options?: RequestInit): Promise<T> {
+    return fetchWithErrorHandling<T>(url, {
+      method: "PATCH",
+      body: data ? JSON.stringify(data) : undefined,
+      ...options,
+    });
+  },
+
+  // DELETE request
+  async delete<T>(url: string, options?: RequestInit): Promise<T> {
+    return fetchWithErrorHandling<T>(url, {
+      method: "DELETE",
+      ...options,
+    });
+  },
+
+  // The original function is still available if needed
+  async request<T>(url: string, options?: RequestInit): Promise<T> {
+    return fetchWithErrorHandling<T>(url, options);
+  },
+};

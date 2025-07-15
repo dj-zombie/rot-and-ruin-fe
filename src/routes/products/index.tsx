@@ -25,7 +25,7 @@ export default component$(() => {
     //     )}
     //   </div>
     // </div>
-    <div class="grid grid-cols-3 gap-8">
+    <div class="mt-4 grid grid-cols-3 gap-8">
       <section
         aria-labelledby="product-heading"
         class="col-span-4 group-has-[[data-pending]]:animate-pulse lg:col-span-3"

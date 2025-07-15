@@ -1,3 +1,130 @@
 @import "tailwindcss";
+@import "./styles/global.css";
+@import "./styles/variables.css";
+@import "./styles/animations.css";
+@import "./styles/fonts.css";
 
+body {
+  background: var(--background);
+  color: var(--foreground);
+  /* font-family: var(--font-inter); */
+  /* font-family: "Jost", sans-serif; */
+  font-family: var(--jost);
+  /* font-family: "Inter", sans-serif; */
+  overflow-x: hidden;
+  position: relative;
+  min-height: 100vh;
+}
 
+@layer base {
+  nav li a {
+    color: var(--foreground);
+    font-size: 1.33rem !important;
+    font-family: var(--font-new-rocker);
+  }
+
+  nav li a:hover {
+    /* text-decoration: underline; */
+    color: var(--primary);
+  }
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background: #000;
+  color: #fff;
+}
+
+input[type="text"]:focus-visible {
+  outline: none;
+  box-shadow: none;
+  --tw-ring-color: transparent;
+}
+
+input[type="text"]:focus-visible:ring-4 {
+  --tw-ring-color: transparent;
+}
+
+input:-internal-autofill-selected {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem 2rem;
+  border-left: 4px solid var(--primary);
+  background: var(--secondary);
+  color: var(--foreground);
+  font-style: italic;
+}
+
+pre {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: var(--secondary);
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+code {
+  font-family: var(--font-mono);
+  background: var(--secondary);
+  padding: 0.2rem 0.4rem;
+  border-radius: 2px;
+  color: var(--primary);
+}
+
+/* Image styling */
+img {
+  max-width: 100%;
+  height: auto;
+  /* margin: 1.5rem 0; */
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  margin: 1.5rem 0;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  border: 1px solid var(--primary);
+  text-align: left;
+}
+
+th {
+  background: var(--secondary);
+  font-weight: 700;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.75rem;
+  }
+  h3 {
+    font-size: 1.5rem;
+  }
+  h4 {
+    font-size: 1.25rem;
+  }
+  h5 {
+    font-size: 1.1rem;
+  }
+  h6 {
+    font-size: 0.9rem;
+  }
+}
+
+p[role="status"] {
+  margin: 0 !important;
+}

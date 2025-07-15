@@ -1,12 +1,13 @@
-import { fetcher } from "./api";
-import type { Product } from "~/types/product"; // Adjust path if needed
+// product-service.ts
+import { apiClient } from "./api";
+import type { Product } from "~/types/product";
 
 export const productService = {
   getProducts: async (): Promise<Product[]> => {
-    return fetcher<Product[]>("/Products");
+    return apiClient.get<Product[]>("/Products");
   },
 
   getProductById: async (id: string): Promise<Product> => {
-    return fetcher<Product>(`/products/${id}`);
+    return apiClient.get<Product>(`/products/${id}`);
   },
 };
