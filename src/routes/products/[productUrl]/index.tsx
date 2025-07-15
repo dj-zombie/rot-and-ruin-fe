@@ -48,7 +48,7 @@ export default component$(() => {
       <div class="flex flex-col gap-8 md:flex-row">
         {/* Left Column - Product Images */}
         <div class="md:w-1/2">
-          <div class="flex h-[35rem] items-center justify-center overflow-hidden rounded-lg bg-gray-100">
+          <div class="flex h-[34rem] items-center justify-center overflow-hidden rounded-lg bg-gray-100">
             <OptimizedImage
               src={imageUrl}
               alt={imageAltText}
