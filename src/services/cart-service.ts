@@ -36,7 +36,7 @@ export const cartService = {
     console.log(`[Cart Service] Found cartId: ${cartId}. Fetching from API.`);
 
     // The API call now includes the specific cartId in the URL
-    return apiClient.get<Cart>(`/api/Cart/${cartId}`);
+    return apiClient.get<Cart>(`/Cart/${cartId}`);
   },
 
   /**
@@ -48,7 +48,7 @@ export const cartService = {
       "[Service] Calling apiClient.post to /Cart/items with payload:",
       payload,
     );
-    const response = await apiClient.post<Cart>("/api/Cart/items", payload);
+    const response = await apiClient.post<Cart>("/Cart/items", payload);
     return response;
   },
 
