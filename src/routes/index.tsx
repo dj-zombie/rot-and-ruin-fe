@@ -5,7 +5,10 @@ export default component$(() => {
   return (
     <>
       <div>
-        <h1 class="text-3xl font-bold p-10 text-center">Hi 👋 Rot and Ruin is currently getting an upgrade. We'll be back soon!</h1>        
+        <h1 class="p-10 text-center text-3xl font-bold">
+          Hi 👋 Rot and Ruin is currently getting an upgrade. We'll be back
+          soon!!
+        </h1>
       </div>
     </>
   );
