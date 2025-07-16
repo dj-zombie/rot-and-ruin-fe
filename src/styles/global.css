@@ -267,6 +267,7 @@
   line-height: 1.2;
   color: var(--primary);
   font-family: var(--font-gothic);
+  font-size: 1.5rem !important;
 }
 
 .blog-post h1,

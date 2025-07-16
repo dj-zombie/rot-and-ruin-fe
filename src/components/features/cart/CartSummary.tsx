@@ -12,7 +12,7 @@ export const CartSummary = component$(() => {
   }
 
   return (
-    <div class="rounded-lg bg-gray-50 p-6">
+    <div class="bg-neutral-950-50 rounded-lg p-6">
       <h2 class="mb-4 text-xl font-semibold">Order Summary</h2>
 
       <div class="space-y-3">

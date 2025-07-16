@@ -9,18 +9,18 @@ export const Header = component$(() => {
   const itemCount = cartStore.state.cart?.items.length || 0;
 
   return (
-    <header class="bg-[var(--dark-red)] shadow">
+    <header class="fixed z-30 w-full bg-[var(--dark-red)] shadow">
       <div class="container mx-auto flex items-center justify-between px-4 py-4">
-        <Link href="/" class="text-xl font-bold">
+        <Link href="/" class="font-rocker text-2xl font-bold">
           Rot And Ruin
         </Link>
 
         <nav class="flex items-center space-x-6">
-          <Link href="/products" class="hover:text-blue-600">
+          <Link href="/products" class="font-rocker text-xl hover:text-red-600">
             Products
           </Link>
 
-          <Link href="/cart" class="relative hover:text-blue-600">
+          <Link href="/cart" class="relative hover:text-red-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -44,7 +44,7 @@ export const Header = component$(() => {
             )}
           </Link>
 
-          <Link href="/login" class="hover:text-blue-600">
+          <Link href="/login" class="font-rocker text-xl hover:text-red-600">
             Login
           </Link>
         </nav>

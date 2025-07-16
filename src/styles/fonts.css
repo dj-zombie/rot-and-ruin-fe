@@ -6,6 +6,9 @@
   font-weight: 400;
   src: url("../fonts/inter-v19-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+.font-sinister {
+  font-family: "Inter";
+}
 /* inter-500 - latin */
 @font-face {
   font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
@@ -39,6 +42,9 @@
   font-weight: 400;
   src: url("../fonts/jost-v19-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+.font-jost {
+  font-family: "Jost";
+}
 
 /* rubik-glitch-regular - latin */
 @font-face {
@@ -48,6 +54,9 @@
   font-weight: 400;
   src: url("../fonts/rubik-glitch-v2-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+.font-glitch {
+  font-family: "Rubik Glitch";
+}
 
 /* new-rocker-regular - latin */
 @font-face {
@@ -56,4 +65,7 @@
   font-style: normal;
   font-weight: 400;
   src: url("../fonts/new-rocker-v16-latin-regular.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+.font-rocker {
+  font-family: "New Rocker";
 }

@@ -25,16 +25,13 @@ export default component$(() => {
     //     )}
     //   </div>
     // </div>
-    <div class="mt-4 grid grid-cols-3 gap-8">
+
+    /*<div class="center mt-4 grid grid-cols-3 sm:gap-8">
       <section
         aria-labelledby="product-heading"
-        class="col-span-4 group-has-[[data-pending]]:animate-pulse lg:col-span-3"
+        class="col-span-4 m-auto group-has-[[data-pending]]:animate-pulse lg:col-span-3"
       >
-        {/* <h2 class="sr-only" id="product-heading">
-          {t("products")}
-        </h2> */}
-
-        <div class="mx-4 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-4">
+      <div class="mx-4 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-4">
           {productsSignal.value.length === 0 ? (
             <p>No products found.</p>
           ) : (
@@ -44,6 +41,16 @@ export default component$(() => {
           )}
         </div>
       </section>
+    </div>*/
+    // A standard container to center your content on the page
+    // Removed the outer grid, section, and extra divs.
+    // Just a clean container for the grid.
+    <div class="mx-auto px-4 py-12 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 xl:gap-x-8 2xl:grid-cols-5">
+        {productsSignal.value.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 });
