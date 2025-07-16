@@ -47,7 +47,7 @@ export default component$(() => {
       <body lang="en">
         <CartProvider>
           <Header />
-          <main class="min-h-screen bg-blue-100 pt-15">
+          <main class="min-h-screen bg-neutral-800 pt-15">
             <RouterOutlet />
           </main>
         </CartProvider>

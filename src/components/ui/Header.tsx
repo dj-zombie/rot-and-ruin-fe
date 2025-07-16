@@ -9,7 +9,7 @@ export const Header = component$(() => {
   const itemCount = cartStore.state.cart?.items.length || 0;
 
   return (
-    <header class="bg-white shadow">
+    <header class="bg-[var(--dark-red)] shadow">
       <div class="container mx-auto flex items-center justify-between px-4 py-4">
         <Link href="/" class="text-xl font-bold">
           Rot And Ruin
