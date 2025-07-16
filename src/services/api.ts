@@ -62,6 +62,7 @@ async function fetchWithErrorHandling<T>(
 export const apiClient = {
   // GET request
   async get<T>(url: string, options?: RequestInit): Promise<T> {
+    console.log(`API: ${API_BASE_URL}${url}`);
     return fetchWithErrorHandling<T>(url, {
       method: "GET",
       ...options,
