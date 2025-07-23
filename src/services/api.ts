@@ -65,6 +65,7 @@ export const apiClient = {
     console.log(`API: ${API_BASE_URL}${url}`);
     return fetchWithErrorHandling<T>(url, {
       method: "GET",
+      credentials: "include",
       ...options,
     });
   },
@@ -73,6 +74,7 @@ export const apiClient = {
   async post<T>(url: string, data?: any, options?: RequestInit): Promise<T> {
     return fetchWithErrorHandling<T>(url, {
       method: "POST",
+      credentials: "include",
       body: data ? JSON.stringify(data) : undefined,
       ...options,
     });
@@ -82,6 +84,7 @@ export const apiClient = {
   async put<T>(url: string, data?: any, options?: RequestInit): Promise<T> {
     return fetchWithErrorHandling<T>(url, {
       method: "PUT",
+      credentials: "include",
       body: data ? JSON.stringify(data) : undefined,
       ...options,
     });
@@ -91,6 +94,7 @@ export const apiClient = {
   async patch<T>(url: string, data?: any, options?: RequestInit): Promise<T> {
     return fetchWithErrorHandling<T>(url, {
       method: "PATCH",
+      credentials: "include",
       body: data ? JSON.stringify(data) : undefined,
       ...options,
     });
@@ -100,6 +104,7 @@ export const apiClient = {
   async delete<T>(url: string, options?: RequestInit): Promise<T> {
     return fetchWithErrorHandling<T>(url, {
       method: "DELETE",
+      credentials: "include",
       ...options,
     });
   },

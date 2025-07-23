@@ -61,9 +61,9 @@ export const ProductCard = component$((props: ProductCardProps) => {
         <p class="ghost-text mt-auto pt-1 text-center text-xl">
           ${product.price.toFixed(2)}
         </p>
-        <button
+        <div
           // class="mt-4 self-stretch rounded-md bg-blue-600 px-4 py-2 font-semibold text-white transition-colors duration-200 ease-in-out hover:bg-blue-700"
-          class="glowing-btn animate-pulse-glow mt-4 cursor-pointer rounded-sm border border-[#8a0303] bg-black/50 px-8 py-3 text-lg tracking-wider text-white uppercase"
+          class="glowing-btn animate-pulse-glow mt-4 cursor-pointer rounded-sm border border-[#8a0303] bg-black/50 px-8 py-3 text-center text-lg tracking-wider text-white uppercase"
           onClick$={(e) => {
             e.preventDefault();
             e.stopPropagation();
@@ -71,7 +71,7 @@ export const ProductCard = component$((props: ProductCardProps) => {
           }}
         >
           View Details
-        </button>
+        </div>
       </div>
     </Link>
   );

@@ -4,6 +4,7 @@ import { QwikCityProvider, RouterOutlet } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
 import { Header } from "./components/ui/Header";
 import { CartProvider } from "./components/cart-provider";
+import { cleanupCartCookies } from "./utils/cookies";
 
 import "./global.css";
 
@@ -48,6 +49,15 @@ export default component$(() => {
         <CartProvider>
           <Header />
           <main class="min-h-screen bg-neutral-900 pt-20">
+            <button
+              class="glowing-btn ml-8 cursor-pointer rounded-md p-3"
+              onClick$={() => {
+                console.log("cart cleared!");
+                cleanupCartCookies();
+              }}
+            >
+              Clear Cart
+            </button>
             <RouterOutlet />
           </main>
         </CartProvider>
