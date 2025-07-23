@@ -1,12 +1,16 @@
 import { component$, useContext } from "@builder.io/qwik";
-import { Link } from "@builder.io/qwik-city";
+import { Link, Form } from "@builder.io/qwik-city";
 import { CartContext } from "~/stores/cart-store";
+import { AuthContext } from "~/stores/auth-store";
+import { useLogoutAction } from "~/routes/layout";
 
 export const Header = component$(() => {
   console.log("Header component rendering");
 
   const cartStore = useContext(CartContext);
   const itemCount = cartStore.state.cart?.items.length || 0;
+  const authState = useContext(AuthContext);
+  const logoutAction = useLogoutAction();
 
   return (
     <header class="fixed z-30 w-full bg-[var(--dark-red)] shadow">
@@ -44,9 +48,31 @@ export const Header = component$(() => {
             )}
           </Link>
 
-          <Link href="/login" class="font-rocker text-xl hover:text-red-600">
-            Login
-          </Link>
+          {authState.user?.username ? (
+            <>
+              <span class="hidden sm:inline">
+                Hello, {authState.user.username}
+              </span>
+              {/* The logout button MUST be inside a Form to trigger the server action */}
+              <Form action={logoutAction}>
+                <button
+                  type="submit"
+                  class="rounded bg-red-500 px-3 py-1 hover:bg-red-600"
+                >
+                  Logout
+                </button>
+              </Form>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                class="font-rocker text-xl hover:text-red-600"
+              >
+                Login
+              </Link>
+            </>
+          )}
         </nav>
       </div>
     </header>
